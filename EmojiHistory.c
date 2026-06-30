@@ -4,8 +4,8 @@
 #define Length_Name 50
 #define Emoji_List 10
 
-char history_array[Emoji_List][Length_Name];
-int current_count = 0; 
+char history_array[Emoji_List][Length_Name] = {"Happy", "Sad"};
+int current_count = 10; 
 
 int finditem();
 int removeDuplicate();
@@ -16,7 +16,6 @@ void saveHistory();
 int loadHistory();
 
 int main() {
-    
     return 0;
 }
 
@@ -37,12 +36,15 @@ void displayHistory() {
     // TODO: Loop from 0 to current_count and printf() each string
 }
 
-
-// Writes the history_array strings into a permanent .txt file
 void saveHistory() {
-    // TODO: fopen("history.txt", "w"), loop and fprintf() strings, fclose()
-}
+    FILE *fp = fopen("history.txt", "w");
 
+    for(int i = 0; i < current_count; i++) {
+        fprintf(fp, "%s\n", history_array[i]);
+    }
+
+    fclose(fp);
+}
 
 // Reads saved emoji strings from the .txt file back into history_array
 int loadHistory() {
