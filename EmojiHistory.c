@@ -4,7 +4,7 @@
 #define Length_Name 50
 #define Emoji_List 10
 
-char history_array[Emoji_List][Length_Name] = {"Happy", "Sad"};
+char history_array[Emoji_List][Length_Name];
 int current_count = 10; 
 
 int finditem();
