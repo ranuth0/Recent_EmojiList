@@ -48,7 +48,7 @@ void saveHistory() {
 int loadHistory() {
     // TODO: fopen("history.txt", "r"), fscanf() strings into array, return count
     FILE *fp;
-    fp = fopen("history.txt", "w");
+    fp = fopen("history.txt", "r");
     int current_count = 0; 
     while (fscanf(fp, "%s", history_array[current_count]))
     {
