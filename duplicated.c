@@ -1,51 +1,46 @@
 #include <stdio.h>
 #include <string.h>
-//Let the emojilist store 10 emojis
+//Let the emojilist store 5 emojis
 #define Length_Name 50
-#define Emoji_List 10
+#define Emoji_List 5
 
 // for the original emoji_list
-int emo_list[Emoji_List] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+char emo_list[Emoji_List][Length_Name] = { "Laugh", "cry", "smile", "look", "angry"};
 
-int finditem();
 
 //remove the inputed emoji from the emoji list 
-int removeDuplicate(int temp) {
-    
-    //the entered emo
+int removeDuplicate(const char *target) {
     int found_emo = -1;
-    int removed_size = Emoji_List-1;
-    int i,j;
-    for (i= 0; i< Emoji_List; i++ ) {
+    int i, j;
 
-        //find the duplicated index
-        if (emo_list[i] == temp) {
+    for (i = 0; i < Emoji_List; i++) {
+        if (strcmp(emo_list[i], target) == 0) {
             found_emo = i;
+            break;
         }
     }
 
-    //for shifting element 
-    for (j= found_emo; j< removed_size; j++ ) {
-        emo_list[j] = emo_list[j+1];
+    if (found_emo == -1) {
+        printf("Emoji not found.\n");
+        return -1;
     }
 
-    //print remain element
-    for (j= 0; j< removed_size; j++ ) {
-        printf("%d ", emo_list[j]);
+    for (j = found_emo; j < Emoji_List - 1; j++) {
+        //emo_list[i][Length_Name] = emo_list[i+1][Length_Name];
+        strcpy(emo_list[j], emo_list[j + 1]);
     }
+
+    //emo_list[Emoji_List - 1][0] = '\0';
+
+    printf("Remaining emojis: \n");
+    for (j = 0; j < Emoji_List - 1; j++) {
+        printf("%s\n", emo_list[j]);
+    }
+
     return 0;
 }
 
-void shiftRight();
-void insertFront();
-void displayHistory();
-void saveHistory();
-int loadHistory();
-
 int main() {
-    int a = 3;
-    /* printf("Enter a number: ");
-    scanf(" %d", &a); */
-    removeDuplicate(a);
+    removeDuplicate("angry");
     return 0;
 }
