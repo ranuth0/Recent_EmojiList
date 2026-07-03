@@ -44,7 +44,15 @@ void insertFront() {
 
 // Prints out the current list of emoji strings stored in history_array
 void displayHistory() {
-    // TODO: Loop from 0 to current_count and printf() each string
+    if (current_count == 0) {
+        printf("No recent emoji.\n");
+        return;
+    }
+
+    printf("Recent History (most recent first):\n");
+    for (int i = 0; i < current_count; i++) {
+        printf("%d. %s\n", i + 1, history_array[i]);
+    }
 }
 
 void saveHistory() {
@@ -58,6 +66,7 @@ void saveHistory() {
 }
 
 // Reads saved emoji strings from the .txt file back into history_array
+//Sakd
 int loadHistory() {
     // TODO: fopen("history.txt", "r"), fscanf() strings into array, return count
     return 0; 
