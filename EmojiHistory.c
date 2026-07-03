@@ -5,7 +5,7 @@
 #define Emoji_List 10
 
 char history_array[Emoji_List][Length_Name];
-int current_count = 0; 
+int current_count = 10; 
 
 int finditem();
 int removeDuplicate();
@@ -16,7 +16,6 @@ void saveHistory();
 int loadHistory();
 
 int main() {
-    
     return 0;
 }
 
@@ -24,6 +23,17 @@ int main() {
 // Shifts string elements in history_array to the right to make room at index 0
 void shiftRight() {
     // TODO: Implement loop shifting strings from index i to i+1 using strcpy()
+    int startindex;
+
+    if(current_count < Emoji_List) {
+        startindex = current_count - 1;
+    } else {
+        startindex = current_count - 2;
+    }
+
+    for(int i = startindex; i >= 0; i--) {
+        strcpy(history_array[i+1], history_array[i]);
+    }
 }
 
 // Inserts a new emoji name string at the very front (index 0) of the array
@@ -37,12 +47,15 @@ void displayHistory() {
     // TODO: Loop from 0 to current_count and printf() each string
 }
 
-
-// Writes the history_array strings into a permanent .txt file
 void saveHistory() {
-    // TODO: fopen("history.txt", "w"), loop and fprintf() strings, fclose()
-}
+    FILE *fp = fopen("history.txt", "w");
 
+    for(int i = 0; i < current_count; i++) {
+        fprintf(fp, "%s\n", history_array[i]);
+    }
+
+    fclose(fp);
+}
 
 // Reads saved emoji strings from the .txt file back into history_array
 //Sakd
