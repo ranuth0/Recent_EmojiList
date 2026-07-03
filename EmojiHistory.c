@@ -7,8 +7,8 @@
 char history_array[Emoji_List][Length_Name];
 int current_count = 10; 
 
-int finditem();
-int removeDuplicate();
+int finditem(char item[]);
+int removeDuplicate(const char *target);
 void shiftRight();
 void insertFront();
 void displayHistory();
@@ -63,15 +63,44 @@ int loadHistory() {
     return 0; 
 }
 
-// Searches for a specific emoji string in the array
-int finditem() {
-    // TODO: Loop through array, use strcmp() to find match, return index or -1
-    return -1; 
+int finditem(char item[])
+{
+    for (int i = 0; i < current_count; i++)
+    {
+        if (strcmp(history_array[i], item) == 0)
+        {
+            return i;
+        }
+    }
+    return -1;
 }
 
 
-// Scans the array and cleans up any matching/repeated emoji strings
-int removeDuplicate() {
-    // TODO: Identify duplicates and compress the array
-    return 0; 
+int removeDuplicate(const char *target) {
+    int found_emo = -1;
+    int i, j;
+
+    for (i = 0; i < Emoji_List; i++) {
+        if (strcmp(history_array[i], target) == 0) {
+            found_emo = i;
+            break;
+        }
+    }
+
+    if (found_emo == -1) {
+        printf("Emoji not found.\n");
+        return -1;
+    }
+
+    for (j = found_emo; j < Emoji_List - 1; j++) {
+        //emo_list[i][Length_Name] = emo_list[i+1][Length_Name];
+        strcpy(history_array[j], history_array[j + 1]);
+    }
+
+    printf("Remaining emojis: \n");
+    for (j = 0; j < Emoji_List - 1; j++) {
+        printf("%s\n", history_array[j]);
+    }
+
+    return 0;
 }
