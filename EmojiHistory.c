@@ -23,6 +23,17 @@ int main() {
 // Shifts string elements in history_array to the right to make room at index 0
 void shiftRight() {
     // TODO: Implement loop shifting strings from index i to i+1 using strcpy()
+    int startindex;
+
+    if(current_count < Emoji_List) {
+        startindex = current_count - 1;
+    } else {
+        startindex = current_count - 2;
+    }
+
+    for(int i = startindex; i >= 0; i--) {
+        strcpy(history_array[i+1], history_array[i]);
+    }
 }
 
 // Inserts a new emoji name string at the very front (index 0) of the array
