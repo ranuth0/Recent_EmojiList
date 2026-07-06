@@ -53,7 +53,7 @@ int loadHistory() {
         return 0;
     }
     int current_count = 0; 
-    while (fscanf(fp, "%s", history_array[current_count]) != NULL)
+    while (fscanf(fp, "%s", history_array[current_count])  != NULL)
     {
         current_count++;
     }
