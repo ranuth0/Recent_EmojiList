@@ -66,10 +66,20 @@ void saveHistory() {
 }
 
 // Reads saved emoji strings from the .txt file back into history_array
-//Sakd
 int loadHistory() {
     // TODO: fopen("history.txt", "r"), fscanf() strings into array, return count
-    return 0; 
+    FILE *fp;
+    fp = fopen("history.txt", "r");
+    if (fp == NULL) {
+        return 0;
+    }
+    int current_count = 0; 
+    while (fscanf(fp, "%s", history_array[current_count])  != NULL)
+    {
+        current_count++;
+    }
+    fclose(fp);
+    return current_count; 
 }
 
 int finditem(char item[])
