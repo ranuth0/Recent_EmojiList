@@ -10,7 +10,7 @@ int current_count = 10;
 int finditem(char item[]);
 int removeDuplicate(const char *target);
 void shiftRight();
-void insertFront();
+void insertFront(char item[]);
 void displayHistory();
 void saveHistory();
 int loadHistory();
@@ -37,8 +37,13 @@ void shiftRight() {
 }
 
 // Inserts a new emoji name string at the very front (index 0) of the array
-void insertFront() {
+void insertFront(char item[]) {
     // TODO: Call shiftRight(), then strcpy() the new emoji into index 0
+    shiftRight();             
+    strcpy(history_array[0], item); 
+    if (current_count < Emoji_List) {
+        current_count++;          
+    }
 }
 
 
