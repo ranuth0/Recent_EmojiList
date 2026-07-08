@@ -10,19 +10,46 @@ int current_count = 10;
 int finditem(char item[]);
 int removeDuplicate(const char *target);
 void shiftRight();
-void insertFront();
+void insertFront(char item[]);
 void displayHistory();
 void saveHistory();
 int loadHistory();
 
 int main() {
+    char input_emoji[Length_Name];
+    current_count = loadHistory();
+
+    while(1){
+        displayHistory();
+        
+        printf("Enter an Emoji or 'exit' to quit: ");
+        fgets(input_emoji, Length_Name, stdin);
+
+        if(strchr(input_emoji, ' ')!= NULL || strlen(input_emoji) == 0 || input_emoji == NULL) {
+            printf("Invalid input or include space.\n");
+            Sleep(2000);
+            continue;
+        }
+
+        input_emoji[strcspn(input_emoji, "\n")] = 0;
+
+        if(!strcmp(input_emoji, "exit")) {
+            printf("Exiting program\n");
+            break;
+        }
+
+        if(finditem(input_emoji)!= -1) {
+            removeDuplicate(input_emoji);
+        }
+        insertFront(input_emoji);
+        Sleep(1000);
+    }
+    saveHistory();
     return 0;
 }
 
 
-// Shifts string elements in history_array to the right to make room at index 0
 void shiftRight() {
-    // TODO: Implement loop shifting strings from index i to i+1 using strcpy()
     int startindex;
 
     if(current_count < Emoji_List) {
@@ -36,13 +63,16 @@ void shiftRight() {
     }
 }
 
-// Inserts a new emoji name string at the very front (index 0) of the array
-void insertFront() {
+void insertFront(char item[]) {
     // TODO: Call shiftRight(), then strcpy() the new emoji into index 0
+    shiftRight();             
+    strcpy(history_array[0], item); 
+    if (current_count < Emoji_List) {
+        current_count++;          
+    }
 }
 
 
-// Prints out the current list of emoji strings stored in history_array
 void displayHistory() {
     if (current_count == 0) {
         printf("No recent emoji.\n");
@@ -65,11 +95,19 @@ void saveHistory() {
     fclose(fp);
 }
 
-// Reads saved emoji strings from the .txt file back into history_array
-//Sakd
 int loadHistory() {
-    // TODO: fopen("history.txt", "r"), fscanf() strings into array, return count
-    return 0; 
+    FILE *fp;
+    fp = fopen("history.txt", "r");
+    if (fp == NULL) {
+        return 0;
+    }
+    int current_count = 0; 
+    while (current_count < Emoji_List && fscanf(fp, "%s", history_array[current_count])== 1)
+    {
+        current_count++;
+    }
+    fclose(fp);
+    return current_count; 
 }
 
 int finditem(char item[])
