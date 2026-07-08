@@ -95,14 +95,16 @@ void saveHistory() {
     fclose(fp);
 }
 
+// Reads saved emoji strings from the .txt file back into history_array
 int loadHistory() {
+    // TODO: fopen("history.txt", "r"), fscanf() strings into array, return count
     FILE *fp;
     fp = fopen("history.txt", "r");
     if (fp == NULL) {
         return 0;
     }
     int current_count = 0; 
-    while (current_count < Emoji_List && fscanf(fp, "%s", history_array[current_count])== 1)
+    while (fscanf(fp, "%s", history_array[current_count]) == 1)
     {
         current_count++;
     }
