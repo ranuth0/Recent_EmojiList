@@ -1,3 +1,24 @@
+/*******************************************************************************
+ * PROGRAM:   Recent Emoji List
+ * COURSE: PRO101: Computer Fundamentals
+ * AUTHOR:    Aun Ratharanuth, Muny Reach, Sok Samnang, Rith Yousthoninsakd, Heang Sreynin, Kheng Leanghuot
+ * LICENSE:    Copyright (c) 2026. All rights reserved. (Proprietary)
+ * 
+ * DESCRIPTION:
+ * This program implements a recent history tracker for emojis. It 
+ * allows users to input emojis, automatically clears duplicates by moving 
+ * them to the front of the list, and limits the history pool to a maximum of 
+ * 5 items. The history state is persistent, saving to and loading from an 
+ * external text file ("history.txt").
+ *
+ * INPUTS:  
+ * - Emoji strings via standard input (stdin).
+ * - Historic data from "history.txt".
+ *
+ * OUTPUTS: 
+ * - An updated terminal display of the 5 most recent unique emojis.
+ * - Data written back to "history.txt" upon clean exit.
+ ******************************************************************************/
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
