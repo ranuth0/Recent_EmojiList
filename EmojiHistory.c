@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 
 #define Length_Name 50
 #define Emoji_List 10
@@ -27,7 +28,7 @@ int main() {
 
         if(strchr(input_emoji, ' ')!= NULL || strlen(input_emoji) == 0 || input_emoji == NULL) {
             printf("Invalid input or include space.\n");
-            Sleep(2000);
+            sleep(2000);
             continue;
         }
 
@@ -42,7 +43,7 @@ int main() {
             removeDuplicate(input_emoji);
         }
         insertFront(input_emoji);
-        Sleep(1000);
+        sleep(1000);
     }
     saveHistory();
     return 0;
