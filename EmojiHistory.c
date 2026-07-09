@@ -129,7 +129,7 @@ int removeDuplicate(const char *target) {
     int found_emo = -1;
     int i, j;
 
-    for (i = 0; i < Emoji_List; i++) {
+    for (i = 0; i < current_count; i++) {
         if (strcmp(history_array[i], target) == 0) {
             found_emo = i;
             break;
@@ -141,13 +141,13 @@ int removeDuplicate(const char *target) {
         return -1;
     }
 
-    for (j = found_emo; j < Emoji_List - 1; j++) {
+    for (j = found_emo; j < current_count - 1; j++) {
         //emo_list[i][Length_Name] = emo_list[i+1][Length_Name];
         strcpy(history_array[j], history_array[j + 1]);
     }
 
     printf("Remaining emojis: \n");
-    for (j = 0; j < Emoji_List - 1; j++) {
+    for (j = 0; j < current_count - 1; j++) {
         printf("%s\n", history_array[j]);
     }
 
