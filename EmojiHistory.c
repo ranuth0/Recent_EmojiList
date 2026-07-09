@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 
 #define Length_Name 50
-#define Emoji_List 10
+#define Emoji_List 5
 
 char history_array[Emoji_List][Length_Name];
-int current_count = 10; 
+int current_count = 5; 
 
 int finditem(char item[]);
 int removeDuplicate(const char *target);
@@ -27,7 +28,7 @@ int main() {
 
         if(strchr(input_emoji, ' ')!= NULL || strlen(input_emoji) == 0 || input_emoji == NULL) {
             printf("Invalid input or include space.\n");
-            Sleep(2000);
+            sleep(2);
             continue;
         }
 
@@ -42,7 +43,7 @@ int main() {
             removeDuplicate(input_emoji);
         }
         insertFront(input_emoji);
-        Sleep(1000);
+        sleep(1);
     }
     saveHistory();
     return 0;
@@ -79,10 +80,10 @@ void displayHistory() {
         return;
     }
 
-    printf("Recent History (most recent first):\n");
     for (int i = 0; i < current_count; i++) {
-        printf("%d. %s\n", i + 1, history_array[i]);
+        printf("%s ", history_array[i]);
     }
+    printf("\n");
 }
 
 void saveHistory() {
@@ -95,14 +96,16 @@ void saveHistory() {
     fclose(fp);
 }
 
+// Reads saved emoji strings from the .txt file back into history_array
 int loadHistory() {
+    // TODO: fopen("history.txt", "r"), fscanf() strings into array, return count
     FILE *fp;
     fp = fopen("history.txt", "r");
     if (fp == NULL) {
         return 0;
     }
     int current_count = 0; 
-    while (current_count < Emoji_List && fscanf(fp, "%s", history_array[current_count])== 1)
+    while (fscanf(fp, "%s", history_array[current_count]) == 1)
     {
         current_count++;
     }
@@ -127,27 +130,28 @@ int removeDuplicate(const char *target) {
     int found_emo = -1;
     int i, j;
 
-    for (i = 0; i < Emoji_List; i++) {
+    for (i = 0; i < current_count; i++) {
         if (strcmp(history_array[i], target) == 0) {
             found_emo = i;
             break;
         }
     }
 
-    if (found_emo == -1) {
-        printf("Emoji not found.\n");
-        return -1;
-    }
+    // if (found_emo == -1) {
+    //     printf("Emoji not found.\n");
+    //     return -1;
+    // }
 
-    for (j = found_emo; j < Emoji_List - 1; j++) {
+    for (j = found_emo; j < current_count - 1; j++) {
         //emo_list[i][Length_Name] = emo_list[i+1][Length_Name];
         strcpy(history_array[j], history_array[j + 1]);
     }
 
-    printf("Remaining emojis: \n");
-    for (j = 0; j < Emoji_List - 1; j++) {
-        printf("%s\n", history_array[j]);
-    }
+    current_count--;
+    // printf("Remaining emojis: \n");
+    // for (j = 0; j < current_count - 1; j++) {
+    //     printf("%s\n", history_array[j]);
+    // }
 
     return 0;
 }
