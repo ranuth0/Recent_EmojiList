@@ -31,7 +31,7 @@ The project repository consists of the following components:
 
 ## Program Flow Chart
 
-![Program Flowchart](https://github.com/user-attachments/assets/eab85cb2-e58a-431b-8708-a4e0a044f724)
+![Program Flowchart](https://github.com/user-attachments/assets/1f14dc68-4b22-4f52-be9d-177f35cb2301)
 
 ## How to Run
 
@@ -41,9 +41,9 @@ You need a C compiler (`gcc` or `clang`) and a standard UNIX terminal terminal r
 ### Steps
 
 1. **Clone the Repository** (or open your local project folder):
-   ```bash
-   cd path/to/your/repository
-   
+```bash
+cd path/to/your/repository
+```
 ### Compilation
 Open your terminal (or MINGW64 bash) and run the following command to compile the source code:
 ```bash
