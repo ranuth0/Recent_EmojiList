@@ -136,20 +136,20 @@ int removeDuplicate(const char *target) {
         }
     }
 
-    if (found_emo == -1) {
-        printf("Emoji not found.\n");
-        return -1;
-    }
+    // if (found_emo == -1) {
+    //     printf("Emoji not found.\n");
+    //     return -1;
+    // }
 
     for (j = found_emo; j < current_count - 1; j++) {
         //emo_list[i][Length_Name] = emo_list[i+1][Length_Name];
         strcpy(history_array[j], history_array[j + 1]);
     }
 
-    printf("Remaining emojis: \n");
-    for (j = 0; j < current_count - 1; j++) {
-        printf("%s\n", history_array[j]);
-    }
+    // printf("Remaining emojis: \n");
+    // for (j = 0; j < current_count - 1; j++) {
+    //     printf("%s\n", history_array[j]);
+    // }
 
     return 0;
 }
