@@ -3,10 +3,10 @@
 #include <unistd.h>
 
 #define Length_Name 50
-#define Emoji_List 10
+#define Emoji_List 5
 
 char history_array[Emoji_List][Length_Name];
-int current_count = 10; 
+int current_count = 5; 
 
 int finditem(char item[]);
 int removeDuplicate(const char *target);
@@ -28,7 +28,7 @@ int main() {
 
         if(strchr(input_emoji, ' ')!= NULL || strlen(input_emoji) == 0 || input_emoji == NULL) {
             printf("Invalid input or include space.\n");
-            sleep(2000);
+            sleep(2);
             continue;
         }
 
@@ -43,7 +43,7 @@ int main() {
             removeDuplicate(input_emoji);
         }
         insertFront(input_emoji);
-        sleep(1000);
+        sleep(1);
     }
     saveHistory();
     return 0;
@@ -147,6 +147,7 @@ int removeDuplicate(const char *target) {
         strcpy(history_array[j], history_array[j + 1]);
     }
 
+    current_count--;
     // printf("Remaining emojis: \n");
     // for (j = 0; j < current_count - 1; j++) {
     //     printf("%s\n", history_array[j]);
