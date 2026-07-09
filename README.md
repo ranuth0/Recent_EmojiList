@@ -1,4 +1,3 @@
-cat << 'EOF' > README.md
 # Recent EmojiList
 
 A lightweight, rolling-history command built in C. This program tracks unique inputs, manages the emoji list sorting by recent and saves state via a text file.
