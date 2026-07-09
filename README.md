@@ -31,34 +31,7 @@ The project repository consists of the following components:
 
 ## Program Flow Chart
 
-[Start Program]
-│
-▼
-[Load history.txt] ─── (Populate array & set current_count)
-│
-▼
-┌──────>
-│      │
-│      ▼
-│   [Print Current History Stack]
-│      │
-│      ▼
-│   [Prompt User for Input]
-│      │
-│      ▼
-│   Is Input Valid? ───(No)───> [Print Error / Sleep] ──┐
-│      │ (Yes)                                          │
-│      ▼                                                │
-│   Is Input "exit"? ───(Yes)───> [Save history.txt] ──> [End]
-│      │ (No)                                           │
-│      ▼                                                │
-│   Does Emoji Exist in History?                        │
-│      │                                                │
-│      ├─────(Yes)─────> [removeDuplicate()]            │
-│      ▼                                                │
-│   [insertFront()] <───────────────────────────────────┘
-│      │
-└──────┘
+![Program Flowchart](https://github.com/user-attachments/assets/eab85cb2-e58a-431b-8708-a4e0a044f724)
 
 ## How to Run
 
@@ -73,13 +46,15 @@ You need a C compiler (`gcc` or `clang`) and a standard UNIX terminal terminal r
    
 ### Compilation
 Open your terminal (or MINGW64 bash) and run the following command to compile the source code:
-
+```bash
 gcc -o EmojiHistory EmojiHistory.c
-
+```
 ### Execution
 On Windows (MINGW64 / Command Prompt):
+```bash
 ./EmojiHistory.exe
-
+```
 On Linux / macOS:
+```bash
 ./EmojiHistory
-EOF
+```
