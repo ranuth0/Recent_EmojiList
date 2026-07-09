@@ -80,10 +80,10 @@ void displayHistory() {
         return;
     }
 
-    printf("Recent History (most recent first):\n");
     for (int i = 0; i < current_count; i++) {
-        printf("%d. %s\n", i + 1, history_array[i]);
+        printf("%s ", history_array[i]);
     }
+    printf("\n");
 }
 
 void saveHistory() {
