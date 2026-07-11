@@ -1,9 +1,9 @@
 /*******************************************************************************
  * PROGRAM:   Recent Emoji List
  * COURSE: PRO101: Computer Fundamentals
- * AUTHOR:    Aun Ratharanuth, Muny Reach, Sok Samnang, Rith Yousthoninsakd, Heang Sreynin, Kheng Leanghuot
- * LICENSE:    Copyright (c) 2026. All rights reserved. (Proprietary)
- * 
+ * AUTHOR:    Aun Ratharanuth, Muny Reach, Sok Samnang, Rith Yousthoninsakd, Heang Sreynin, Kheng Leanghuot
+ * LICENSE:    This project is developed as part of the Computer Fundamentals course at CamTech University.
+ *             Copyright (c) 2026. All rights reserved. (Proprietary)
  * DESCRIPTION:
  * This program implements a recent history tracker for emojis. It 
  * allows users to input emojis, automatically clears duplicates by moving 
@@ -22,9 +22,10 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
+#include <stdbool.h>
 
 #define Length_Name 50
-#define Emoji_List 5
+#define Emoji_List 10
 
 char history_array[Emoji_List][Length_Name];
 int current_count = 5; 
@@ -36,6 +37,7 @@ void insertFront(char item[]);
 void displayHistory();
 void saveHistory();
 int loadHistory();
+bool isemoji(const char *str);
 
 int main() {
     char input_emoji[Length_Name];
@@ -47,22 +49,23 @@ int main() {
         printf("Enter an Emoji or 'exit' to quit: ");
         fgets(input_emoji, Length_Name, stdin);
 
-        if(strchr(input_emoji, ' ')!= NULL || strlen(input_emoji) == 0 || input_emoji == NULL) {
-            printf("Invalid input or include space.\n");
-            sleep(2);
-            continue;
-        }
-
         input_emoji[strcspn(input_emoji, "\n")] = 0;
 
         if(!strcmp(input_emoji, "exit")) {
             printf("Exiting program\n");
             break;
         }
+        
+        if(!isemoji(input_emoji)) {
+            printf("Invalid input or include space.\n");
+            sleep(1);
+            continue;
+        }
 
         if(finditem(input_emoji)!= -1) {
             removeDuplicate(input_emoji);
         }
+        
         insertFront(input_emoji);
         sleep(1);
     }
@@ -175,4 +178,56 @@ int removeDuplicate(const char *target) {
     // }
 
     return 0;
+}
+
+bool isemoji(const char *str) {
+    int len = strlen(str);
+
+    if (len < 3) {
+        return false;
+    }
+
+    int i = 0;
+    int emojicount = 0;
+    while(i < len) {
+        unsigned char c = (unsigned char)str[i];
+            if(c<=127) {
+                return false;
+            }
+
+            if(c >=224 && c <= 247) {
+                int bytes;
+                    if(c >= 240) {
+                        bytes = 4;
+                    } else {
+                        bytes = 3;
+                    }
+                    
+                    if(i+bytes > len) {
+                        return false;
+                    }
+
+                    for(int j = 1; j < bytes; j++) {
+                        unsigned char next_c = (unsigned char)str[i+j];
+                            if(next_c < 128 || next_c >191) {
+                                return false;
+                            }
+                    }
+
+                    i+= bytes;
+                    emojicount++;
+                    if (i < len) {
+                        return false;
+                    }
+
+            } else {
+                return false;
+            }
+
+        if(emojicount == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
